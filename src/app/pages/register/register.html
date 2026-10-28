@@ -6,28 +6,33 @@
       <p>Completá tus datos para empezar.</p>
     </div>
 
-    <form class="auth-form" (ngSubmit)="submit()" #registerForm="ngForm">
+    <form class="auth-form" (submit)="onsubmit($event)">
       <div class="field-group">
-        <label for="name">Nombre completo</label>
-        <input id="name" name="name" type="text" placeholder="Tu nombre" [(ngModel)]="name" required autocomplete="name" />
+        <label for="name">Nombre</label>
+        <input id="name" type="text" placeholder="Tu nombre" [formField]="formRegister.firstName" autocomplete="name" />
+      </div>
+
+      <div class="field-group">
+        <label for="apellido">Apellido</label>
+        <input id="apellido" type="text" placeholder="Tu Apellido" [formField]="formRegister.lastName" autocomplete="apellido" />
       </div>
 
       <div class="field-group">
         <label for="email">Correo electrónico</label>
-        <input id="email" name="email" type="email" placeholder="juan@austral.edu.ar" [(ngModel)]="email" required email autocomplete="email" />
+        <input id="email" type="email" placeholder="juan@austral.edu.ar" [formField]="formRegister.email" email autocomplete="email" />
       </div>
 
       <div class="field-group">
         <label for="password">Contraseña</label>
-        <input id="password" name="password" type="password" placeholder="Mínimo 6 caracteres" [(ngModel)]="password" required minlength="6" autocomplete="new-password" />
+        <input id="password" type="password" placeholder="Mínimo 6 caracteres" [formField]="formRegister.password" autocomplete="new-password" />
       </div>
 
       <div class="field-group">
         <label for="passwordConfirmation">Repetir contraseña</label>
-        <input id="passwordConfirmation" name="passwordConfirmation" type="password" placeholder="Repetí tu contraseña" [(ngModel)]="passwordConfirmation" required autocomplete="new-password" />
+        <input id="passwordConfirmation" type="password" placeholder="Repetí tu contraseña" [formField]="formRegister.confirmPassword" autocomplete="new-password" />
       </div>
 
-      <button type="submit" [disabled]="registerForm.invalid || password !== passwordConfirmation">Crear cuenta</button>
+      <button type="submit" [disabled]="formRegister().invalid() || formRegister.password().value() !== formRegister.confirmPassword().value()">Crear cuenta</button>
     </form>
 
     <p class="switch-copy">¿Ya tenés cuenta? <a routerLink="/login">Iniciar sesión</a></p>

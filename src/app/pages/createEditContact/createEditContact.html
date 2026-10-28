@@ -1,0 +1,24 @@
+<form (submit)="onSubmit($event)">
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" [formField]="formCreate.firstName">
+    <label for="apellido">Apellido:</label>
+    <input type="text" id="apellido" [formField]="formCreate.lastName">
+    <label for="telefono">Teléfono:</label>
+    <input type="text" id="telefono" [formField]="formCreate.number">
+    <label for="direccion">Dirección:</label>
+    <input type="text" id="direccion" [formField]="formCreate.address">
+    <label for="email">Email:</label>
+    <input type="email" id="email" [formField]="formCreate.email">
+    <label for="empresa">Empresa:</label>
+    <input type="text" id="empresa" [formField]="formCreate.company">
+    <label for="descripcion">Descripción:</label>
+    <input type="text" id="descripcion" [formField]="formCreate.description">
+    <label for="favorito">Favorito:</label>
+    <label class="toggle" aria-label="Marcar como favorito">
+        <input type="checkbox" id="favorito" role="switch" [formField]="formCreate.isFavorite">
+        <span class="toggle-slider"></span>
+    </label>
+    <button type="submit" [disabled]="submitting()">
+        {{ submitting() ? 'Guardando...' : (id() ? 'Editar contacto' : 'Agregar contacto') }}
+    </button>
+</form>

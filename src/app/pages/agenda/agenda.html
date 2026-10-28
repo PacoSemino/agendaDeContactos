@@ -4,12 +4,13 @@
       <div>
         <p class="eyebrow">Directorio personal</p>
         <h1 id="agenda-title">Mis contactos</h1>
-        <p class="agenda-summary">{{ contacts.length }} contactos guardados</p>
+        <p class="agenda-summary">{{ contacts().length }} contactos guardados</p>
       </div>
+      <button class="primary-action" (click)="logout()">Cerrar sesión</button>
       <a class="primary-action" routerLink="/agenda/create">Agregar contacto</a>
     </header>
 
-    @if (contacts.length === 0) {
+    @if (contacts().length === 0) {
       <div class="empty-state">
         <p class="empty-kicker">Todavía no hay contactos</p>
         <p>Agregá el primero para empezar a organizar tu agenda.</p>
@@ -17,14 +18,20 @@
       </div>
     }
 
+
     <div class="contact-list">
-    @for (contacto of contacts; track contacto.id) {
+    @for (contacto of contacts(); track contacto.id) {
       <article class="contact-row">
         <div class="avatar" aria-hidden="true">
           {{ contacto.firstName.charAt(0).toUpperCase() }}
         </div>
         <div class="contact-copy">
-          <h2>{{ contacto.firstName }} {{ contacto.lastName }}</h2>
+          <h2>
+            {{ contacto.firstName }} {{ contacto.lastName }}
+            @if (contacto.isFavorite) {
+              <span class="favorite-label">Favorito</span>
+            }
+          </h2>
           <p>{{ contacto.number }}</p>
         </div>
         <div class="contact-actions">

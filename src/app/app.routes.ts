@@ -2,38 +2,40 @@ import { Routes } from '@angular/router';
 import { LoginComponent } from './pages/login/login';
 import { RegisterComponent } from './pages/register/register';
 import { Agenda } from './pages/agenda/agenda';
-import { AgendaDetails } from './pages/agenda-details/agenda-details';
-import { CreateEditContact } from './pages/create-edit-contact/create-edit-contact';
-
+import { AgendaDetails } from './pages/agendaDetails/agendaDetails';
+import { CreateEditContact } from './pages/createEditContact/createEditContact';
+import { authGuardsGuard } from './guards/auth-guards-guard';
+import { loginGuardGuard } from './guards/login-guard-guard';
 
 export const routes: Routes = [
     {
         path: "login",
-        component: LoginComponent
+        component: LoginComponent,
+        canActivate: [loginGuardGuard]
     },
     {
         path: "register",
-        component: RegisterComponent
+        component: RegisterComponent,
+        canActivate: [loginGuardGuard]
     },
     {
-        path: "agenda",
-        component: Agenda
+        path: "",
+        component: Agenda,
+        canActivate: [authGuardsGuard]
     },
     {
         path: "agenda/create",
-        component: CreateEditContact
+        component: CreateEditContact,
+        canActivate: [authGuardsGuard]
     },
     {
         path: "agenda/:id/edit",
-        component: CreateEditContact
+        component: CreateEditContact,
+        canActivate: [authGuardsGuard]
     },
     {
         path: "agenda/:id",
-        component: AgendaDetails
-    },
-    {
-        path: '',
-        pathMatch: 'full',
-        redirectTo: 'agenda'
+        component: AgendaDetails,
+        canActivate: [authGuardsGuard]
     }
 ];

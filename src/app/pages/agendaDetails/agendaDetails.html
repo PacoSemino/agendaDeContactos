@@ -1,0 +1,28 @@
+<main class="details-page">
+    <section class="details-card">
+        <h1>Detalles del contacto</h1>
+    @if (loading()) {
+        <p class="empty-message">Cargando contacto...</p>
+    } @else if (error()) {
+        <p class="empty-message">{{ error() }}</p>
+    } @else if (contact(); as currentContact) {
+        <div class="contact-details">
+            <p><strong>Nombre</strong>{{ currentContact.firstName }}</p>
+            <p><strong>Apellido</strong>{{ currentContact.lastName }}</p>
+            <p><strong>Teléfono</strong>{{ currentContact.number }}</p>
+            <p><strong>Correo electrónico</strong>{{ currentContact.email }}</p>
+            <p><strong>Dirección</strong>{{ currentContact.address }}</p>
+            <p><strong>Empresa</strong>{{ currentContact.company }}</p>
+            <p><strong>Descripción</strong>{{ currentContact.description }}</p>
+            <p><strong>Favorito</strong>{{ currentContact.isFavorite ? 'Sí' : 'No' }}</p>
+        </div>
+        <div class="details-actions">
+            <a [routerLink]="['/agenda', currentContact.id, 'edit']">Editar contacto</a>
+            <a routerLink="/">Volver a la agenda</a>
+        </div>
+    } @else {
+        <p class="empty-message">No se encontró el contacto.</p>
+        <a routerLink="/">Volver a la agenda</a>
+    }
+    </section>
+</main>

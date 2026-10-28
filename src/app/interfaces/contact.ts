@@ -3,10 +3,10 @@ export interface Contact {
   firstName: string;
   lastName: string;
   number: string;
-  image?: string;
   address: string;
   email: string;
   company: string;
   description: string;
   isFavorite: boolean;
+  groupIds?: string[];
 }

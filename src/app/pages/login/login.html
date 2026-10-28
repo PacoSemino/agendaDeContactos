@@ -6,15 +6,15 @@
       <p>Ingresá tu correo y contraseña.</p>
     </div>
 
-    <form class="auth-form" (ngSubmit)="submit()" #loginForm="ngForm">
+    <form class="auth-form" (submit)="onsubmit($event)" #loginForm="ngForm">
       <div class="field-group">
         <label for="email">Correo electrónico</label>
-        <input id="email" name="email" type="email" placeholder="juan@austral.edu.ar" [(ngModel)]="email" required email autocomplete="email" />
+        <input id="email" type="email" placeholder="juan@austral.edu.ar" [formField]="formLogin.email" email autocomplete="email" />
       </div>
 
       <div class="field-group">
         <label for="password">Contraseña</label>
-        <input id="password" name="password" type="password" placeholder="Tu contraseña" [(ngModel)]="password" required minlength="6" autocomplete="current-password" />
+        <input id="password" type="password" placeholder="Tu contraseña" [formField]="formLogin.password" autocomplete="current-password" />
       </div>
 
       <button type="submit" [disabled]="loginForm.invalid">Entrar</button>
