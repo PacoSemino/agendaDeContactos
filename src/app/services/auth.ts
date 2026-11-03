@@ -45,7 +45,18 @@ export class Auth {
       body: JSON.stringify(registerData),
     });
 
-    return this.saveAuthenticationToken(response);
+    if (!response.ok) {
+      return false;
+    }
+
+    if (await this.saveAuthenticationToken(response, false)) {
+      return true;
+    }
+
+    return this.login({
+      email: register.email,
+      password: register.password,
+    });
   }
 
   logout(): void {
@@ -55,7 +66,10 @@ export class Auth {
     this.token = '';
   }
 
-  private async saveAuthenticationToken(response: Response): Promise<boolean> {
+  private async saveAuthenticationToken(
+    response: Response,
+    reportMissingToken = true,
+  ): Promise<boolean> {
     if (!response.ok) {
       return false;
     }
@@ -65,6 +79,10 @@ export class Auth {
     const token = this.extractToken(authorizationHeader || body);
 
     if (!token) {
+      if (!reportMissingToken) {
+        return false;
+      }
+
       console.error(
         'La API de autenticación no devolvió un JWT. Respuesta recibida:',
         body,
