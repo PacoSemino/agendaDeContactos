@@ -28,9 +28,9 @@
         <div class="contact-copy">
           <h2>
             {{ contacto.firstName }} {{ contacto.lastName }}
-            @if (contacto.isFavorite) {
-              <span class="favorite-label">Favorito</span>
-            }
+            <span class="favorite-label" [class.not-favorite]="!contacto.isFavorite">
+              {{ contacto.isFavorite ? '★ Favorito' : '☆ No favorito' }}
+            </span>
           </h2>
           <p>{{ contacto.number }}</p>
         </div>

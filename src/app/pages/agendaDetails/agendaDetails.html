@@ -1,5 +1,6 @@
 <main class="details-page">
     <section class="details-card">
+        <a class="back-link" routerLink="/" aria-label="Volver a la agenda">← Volver</a>
         <h1>Detalles del contacto</h1>
     @if (loading()) {
         <p class="empty-message">Cargando contacto...</p>
@@ -18,11 +19,9 @@
         </div>
         <div class="details-actions">
             <a [routerLink]="['/agenda', currentContact.id, 'edit']">Editar contacto</a>
-            <a routerLink="/">Volver a la agenda</a>
         </div>
     } @else {
         <p class="empty-message">No se encontró el contacto.</p>
-        <a routerLink="/">Volver a la agenda</a>
     }
     </section>
 </main>

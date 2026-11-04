@@ -25,6 +25,14 @@ h1 {
 	letter-spacing: -0.05em;
 }
 
+.back-link {
+	display: inline-block;
+	margin-bottom: 20px;
+	color: var(--accent-dark);
+	font-weight: 700;
+	text-decoration: none;
+}
+
 .contact-details {
 	display: grid;
 	gap: 12px;

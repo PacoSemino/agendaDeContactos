@@ -33,6 +33,10 @@ export class CreateEditContact {
   submitting = signal(false);
   originalFavorite = false;
 
+  volver(): void {
+    void this.router.navigate(['/']);
+  }
+
   async ngOnInit(): Promise<void> {
     if (this.id()) {
       const contact = await this.contactServices.getContactById(this.id()!);
@@ -73,16 +77,7 @@ export class CreateEditContact {
   }
 
   async crearContacto(): Promise<void> {
-    const createdContact = await this.contactServices.addContact(this.newContact());
-    if (createdContact.isFavorite) {
-      await this.contactServices.toggleFavorite(createdContact.id);
-      this.contactServices.contactList.update((contacts) =>
-        contacts.map((item) =>
-          item.id === createdContact.id ? { ...item, isFavorite: true } : item,
-        ),
-      );
-    }
-
+    await this.contactServices.addContact(this.newContact());
     await this.swal().fire({
       icon: 'success',
       title: 'Contacto creado',

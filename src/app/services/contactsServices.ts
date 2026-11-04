@@ -65,6 +65,12 @@ export class ContactsServices {
 
     const createdContact = await response.json() as Contact;
     this.contactList.update((contacts) => [...contacts, createdContact]);
+
+    if (isFavorite && !createdContact.isFavorite) {
+      await this.toggleFavorite(createdContact.id);
+      return { ...createdContact, isFavorite: true };
+    }
+
     return createdContact;
   }
 

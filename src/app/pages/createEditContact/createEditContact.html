@@ -1,4 +1,6 @@
 <form (submit)="onSubmit($event)">
+    <button type="button" class="back-link" (click)="volver()" aria-label="Volver a la agenda">← Volver</button>
+    <h1>{{ id() ? 'Editar contacto' : 'Nuevo contacto' }}</h1>
     <label for="nombre">Nombre:</label>
     <input type="text" id="nombre" [formField]="formCreate.firstName">
     <label for="apellido">Apellido:</label>
